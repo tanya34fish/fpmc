@@ -17,4 +17,4 @@
 ## Dataset
 * cross_validation/train contains train files and cross_validation/test contains test files
 * Format:
-* userId sequenceId sequenceLength app_0 app_1 app_2 .... app_n
+** userId sequenceId sequenceLength app_0 app_1 app_2 .... app_n
