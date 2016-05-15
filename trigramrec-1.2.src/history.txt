@@ -1,0 +1,6 @@
+== 1.10 ==
+* Add: fast implementation of "fm" without use of generic prediction and gradient steps. The method "fm" is now the fast version and "fmgeneric" is the slower one using generic prediction and update steps. I added both versions to show (1) how the generic fm-library can be used for gradients and prediction and (2) how both steps can be integrated.
+* Improvement: using the method of Leva for generating Gaussian random numbers
+* Bugfix: Regularization value of the "fm"-model was read as integer from command line.
+* Bugfix: add typedef for uint
+
