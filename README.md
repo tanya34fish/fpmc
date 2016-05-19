@@ -12,7 +12,7 @@
 ## Usage
 * cd trigramrec-1.2.src
 * make
-* ./run_cv.sh 2 ipad  # This will run the code
+* ./run_cv.sh 3 ipad  # This will run the code
 
 ## Dataset
 * cross_validation/train contains train files and cross_validation/test contains test files
