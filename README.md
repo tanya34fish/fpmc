@@ -12,7 +12,7 @@
 ## Usage
 * cd trigramrec-1.2.src
 * make
-* ./run_cv.sh 3 ipad  # This will run the code that consider 2 previous basket to predict next basket.
+* ./run_cv.sh 1 ipad  # This will run the code that consider 2 previous basket to predict next basket.
 
 ## Dataset
 * cross_validation/train contains train files and cross_validation/test contains test files
