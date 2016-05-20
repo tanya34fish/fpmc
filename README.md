@@ -21,13 +21,13 @@
 ## More Details of Implementation.
 * Please see the following.
 * src/basketrec/basketrec.cpp:
-** this is the main function
-** load data (use src/basketrec/src/Data.h)
-** instantiate a NextBasketRecommender object. (use src/basketrec/src/NextBasketRecommender.h)
-** instantiate a NextBasketRecommenderFPMC object.
-** call "NextBasketRecommenderFPMC::train" to set up parameters and training.
-** call "NextBasketRecommender::evaluate" for evaluation on test data.
-** call "NextBasketRecommender::savePredict" to output for the prediction on test data.
+..* this is the main function
+..* load data (use src/basketrec/src/Data.h)
+..* instantiate a NextBasketRecommender object. (use src/basketrec/src/NextBasketRecommender.h)
+..* instantiate a NextBasketRecommenderFPMC object.
+..* call "NextBasketRecommenderFPMC::train" to set up parameters and training.
+..* call "NextBasketRecommender::evaluate" for evaluation on test data.
+..* call "NextBasketRecommender::savePredict" to output for the prediction on test data.
 
 * NextBasketRecommender
 ** "NextBasketRecommender" is the base class. It contains basic function you will need.
