@@ -21,31 +21,33 @@
 ## More Details of Implementation.
 * Please see the following.
 * src/basketrec/basketrec.cpp:
-  * this is the main function
-  * load data (use src/basketrec/src/Data.h)
-⋅⋅* instantiate a NextBasketRecommender object. (use src/basketrec/src/NextBasketRecommender.h)
-⋅⋅* instantiate a NextBasketRecommenderFPMC object.
-⋅⋅* call "NextBasketRecommenderFPMC::train" to set up parameters and training.
-⋅⋅* call "NextBasketRecommender::evaluate" for evaluation on test data.
-⋅⋅* call "NextBasketRecommender::savePredict" to output for the prediction on test data.
+  1. this is the main function
+  2. load data (use src/basketrec/src/Data.h)
+  3. instantiate a NextBasketRecommender object. (use src/basketrec/src/NextBasketRecommender.h)
+  4. instantiate a NextBasketRecommenderFPMC object.
+  5. call "NextBasketRecommenderFPMC::train" to set up parameters and training.
+  6. call "NextBasketRecommender::evaluate" for evaluation on test data.
+  7. call "NextBasketRecommender::savePredict" to output for the prediction on test data.
 
 * NextBasketRecommender
-** "NextBasketRecommender" is the base class. It contains basic function you will need.
-** You can extend this class when you want to implement other learning methods other than FPMC.
-** NextBasketRecommender::evaluate - This evaluate the results on the test data. We use MRR for evaluation metric.
-** NextBasketRecommender::predictTopItems - given user and basket, predict scores for every item in the next basket.
-** NextBasketRecommender::testpredict - use for output the predict result.
-** NextBasketRecommender::savePrediction - call NextBasketRecommender::testpredict and output to file.
+  * "NextBasketRecommender" is the base class. It contains basic function you will need.
+  * You can extend this class when you want to implement other learning methods other than FPMC.
+  * NextBasketRecommender::evaluate - This evaluate the results on the test data. We use MRR for evaluation metric.
+  * NextBasketRecommender::predictTopItems - given user and basket, predict scores for every item in the next basket.
+  * NextBasketRecommender::testpredict - use for output the predict result.
+  * NextBasketRecommender::savePrediction - call NextBasketRecommender::testpredict and output to file.
 
 * basket_rec_fpmc.h: 
-** "NextBasketRecommenderFPMC" is a derived class from "NextBasketRecommender".
-** It contains important parameters and functions you will need during the learning process.
-** NextBasketRecommenderFPMC::train - This will instantiate a "BasketLearnerBPR" object.
-** NextBasketRecommenderFPMC::init - assign the parameters and set up the latent matrices we need to learn.
-** NextBasketRecommenderFPMC::predict - given user, basket and an item, predict the score.
-** NextBasketRecommenderFPMC::learn - the main learning process.
+  * "NextBasketRecommenderFPMC" is a derived class from "NextBasketRecommender".
+  * It contains important parameters and functions you will need during the learning process.
+  * NextBasketRecommenderFPMC::train - This will instantiate a "BasketLearnerBPR" object.
+  * NextBasketRecommenderFPMC::init - assign the parameters and set up the latent matrices we need to learn.
+  * NextBasketRecommenderFPMC::predict - given user, basket and an item, predict the score.
+  * NextBasketRecommenderFPMC::learn - the main learning process.
 
 * BasketLearnerBPR:
-** "BasketLearnerBPR" is a class used only for BPR setting.
-** BasketLearnerBPR::train - calculate how many baskets from training data. Implement the outer iteration and sampling for BPR. on line 111, it will call "NextBasketRecommenderFPMC::learn" for the learning process. on line 118, it will call "NextBasketRecommender::evaluate" for the evaluation.
-** BasketLearnerBPR::drawNextItemNeg - sample a negative item (used for BPR)
+  * "BasketLearnerBPR" is a class used only for BPR setting.
+  * BasketLearnerBPR::train - calculate how many baskets from training data. Implement the outer iteration and sampling for BPR.
+  * on line 111, it will call "NextBasketRecommenderFPMC::learn" for the learning process. 
+  * on line 118, it will call "NextBasketRecommender::evaluate" for the evaluation.
+  * BasketLearnerBPR::drawNextItemNeg - sample a negative item (used for BPR)
