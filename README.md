@@ -1,10 +1,10 @@
 # Basketrec
 ## Next-Basket Recommendation
-* This project implemented a BPR-based recommendation.
+* This project implemented a BPR-based recommendation. It extends the FPMC model by considering 2 previous baskets to predict next basket.
 * Origin paper: Factorizing personalized Markov chains for next-basket recommendation (WWW, 2010)
 
 ## Implementation
-* This project is modified from codes of Tag Recommender which is also proposed by Steffen Rendle
+* This project is modified from codes of Tag Recommender which is also proposed by Steffen Rendle.
 * please see this website for details.
 * http://www.informatik.uni-konstanz.de/rendle/software/tag-recommender/
 * Reference: Steffen Rendle, Lars Schmidt-Thieme (2010): Pairwise Interaction Tensor Factorization for Personalized Tag Recommendation, in Proceedings of the Third ACM International Conference on Web Search and Data Mining (WSDM 2010), ACM.
@@ -12,8 +12,32 @@
 ## Usage
 * cd trigramrec-1.2.src
 * make
-* ./run_cv.sh 3 ipad  # This will run the code
+* ./run_cv.sh 3 ipad  # This will run the code that consider 2 previous basket to predict next basket.
 
 ## Dataset
 * cross_validation/train contains train files and cross_validation/test contains test files
 * Format: userId sequenceId sequenceLength app_0 app_1 app_2 .... app_n
+
+## More Details of Implementation.
+* Please see the following.
+(1)src/basketrec/basketrec.cpp:
+	(a) this is the main function
+	(b) load data (use src/basketrec/src/Data.h)
+	(c) instantiate a NextBasketRecommender object. (use src/basketrec/src/NextBasketRecommender.h)
+		"NextBasketRecommender" is the base class. It contains basic function you will need.
+		You can extend this class when you want to implement other learning methods other than FPMC.
+		NextBasketRecommender::evaluate - This evaluate the results on the test data. We use MRR for evaluation metric.
+		NextBasketRecommender::predictTopItems - given user and basket, predict scores for every item in the next basket.
+		NextBasketRecommender::testpredict - use for output the predict result.
+		NextBasketRecommender::savePrediction - call NextBasketRecommender::testpredict and output to file.
+	(d) basket_rec_fpmc.h: "NextBasketRecommenderFPMC" is a derived class from "NextBasketRecommender".
+		It contains important parameters and functions you will need during the learning process.
+		NextBasketRecommenderFPMC::train - This will instantiate a "BasketLearnerBPR" object.
+		NextBasketRecommenderFPMC::init - assign the parameters and set up the latent matrices we need to learn.
+		NextBasketRecommenderFPMC::predict - given user, basket and an item, predict the score.
+		NextBasketRecommenderFPMC::learn - the main learning process.
+	(e) "BasketLearnerBPR" is a class used only for BPR setting.
+		BasketLearnerBPR::train - calculate how many baskets from training data. Implement the outer iteration and sampling for BPR.
+								on line 111, it will call "NextBasketRecommenderFPMC::learn" for the learning process.
+								on line 118, it will call "NextBasketRecommender::evaluate" for the evaluation.
+		BasketLearnerBPR::drawNextItemNeg - sample a negative item (used for BPR)
