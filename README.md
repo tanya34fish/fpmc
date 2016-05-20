@@ -32,8 +32,8 @@
 * NextBasketRecommender
   * "NextBasketRecommender" is the base class. It contains basic function you will need.
   * You can extend this class when you want to implement other learning methods other than FPMC.
-  * NextBasketRecommender::evaluate - This evaluate the results on the test data. We use MRR for evaluation metric.
-  * NextBasketRecommender::predictTopItems - given user and basket, predict scores for every item in the next basket.
+  * NextBasketRecommender::evaluate - This evaluates the results on the test data. We use MRR for evaluation metric.
+  * NextBasketRecommender::predictTopItems - given user and basket, predict scores for every possible items.
   * NextBasketRecommender::testpredict - use for output the predict result.
   * NextBasketRecommender::savePrediction - call NextBasketRecommender::testpredict and output to file.
 
