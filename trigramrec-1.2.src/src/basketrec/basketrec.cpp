@@ -54,7 +54,7 @@ int main(int argc, char **argv) {
 
 		const std::string param_init_stdev	= cmdline.registerParameter("init_stdev", "stdev for initialization of 2-way factors; default=0.01");			
 		const std::string param_num_iter	= cmdline.registerParameter("iter", "number of iterations for SGD; default=100");
-		const std::string param_learn_rate	= cmdline.registerParameter("learn_rate", "learn_rate for SGD; default=0.1");
+		const std::string param_learn_rate	= cmdline.registerParameter("learn_rate", "learn_rate for SGD; default=0.01");
 		const std::string param_num_sample      = cmdline.registerParameter("num_sample", "number of the pair samples drawn for each training tuple, default 100");
 
 		const std::string param_help            = cmdline.registerParameter("help", "this screen");
@@ -78,7 +78,7 @@ int main(int argc, char **argv) {
 	 		NextBasketRecommenderFPMC *fpmc = new NextBasketRecommenderFPMC();
  			
 			fpmc->loss_function = LOSS_FUNCTION_LN_SIGMOID;
-			fpmc->learn_rate = cmdline.getValue(param_learn_rate, 0.1);
+			fpmc->learn_rate = cmdline.getValue(param_learn_rate, 0.01);
 			fpmc->num_neg_samples = cmdline.getValue(param_num_sample, 100);
 	 		fpmc->num_iterations = cmdline.getValue(param_num_iter, 100);
 				
